@@ -1,0 +1,33 @@
+.mainView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(118, 216, 227);
+  height: 200px;
+  width: 275px;
+  border-style: solid;
+  box-shadow: 3px 3px 3px #888888;
+}
+
+.picView {
+  background-color: white;
+  height: 100px;
+  width: 250px;
+  margin: 10px;
+  border-style: solid;
+  box-shadow: 3px 3px 3px #888888;
+  padding-bottom: 30px;
+}
+
+.nameView {
+  background-color: white;
+  height: 30px;
+  width: 250px;
+  border-style: solid;
+  box-shadow: 3px 3px 3px #888888;
+}
+
+p {
+  margin: 0px;
+  padding: 5px;
+}

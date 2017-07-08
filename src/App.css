@@ -1,0 +1,39 @@
+body {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+.App {
+  text-align: center;
+  background-color: rgb(129, 216, 122);
+  border-style: solid;
+  height: 380px;
+  width: 340px;
+  box-shadow: 3px 3px 3px #888888;
+}
+
+.App-header {
+  padding-bottom: 30px;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+input {
+  margin-right: 20px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.middleBox {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
