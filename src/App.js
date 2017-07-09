@@ -12,13 +12,20 @@ class App extends Component {
     super(props)
 
     this.state = {
-      id: 6,
+      id: 1,
       name: '',
       img: ''
     }
+
+    this.fetchPokemon = this.fetchPokemon.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount(){
+    this.fetchPokemon();
+  }
+
+  fetchPokemon(){
     getPokemon(this.state.id).then(pokemon => 
       {
         this.setState({
@@ -29,6 +36,10 @@ class App extends Component {
     )
   }
 
+  handleChange(e){
+    this.setState({ id: e.target.value })
+  }
+
   render() {
     return (
       <Router>
@@ -36,8 +47,8 @@ class App extends Component {
           <div className="App-header">
             <img src={pokemon_logo} className="App-logo" alt="logo" />
           </div>
-            <input placeholder="poke-search"/>
-            <button>Search</button>
+            <input placeholder="poke-search" onChange={this.handleChange}/>
+            <button onClick={this.fetchPokemon}>Search</button>
           
           <div className='middleBox'>
             <Pokemon id={this.state.id} name={this.state.name} img={this.state.img} />
