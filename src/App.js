@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import routes from './routes'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import Pokemon from './components/Pokemon';
+import Details from './container/Details';
+import routes from './utils/routes';
 import './App.css';
 
 export default class App extends Component {
-
   render() {
     return (
-      <div>
-        { routes }
-      </div>
+      <Router>
+        <div>
+          <Pokemon />
+        </div>
+      </Router>
     );
   }
 }

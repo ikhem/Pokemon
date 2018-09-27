@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, Route, BrowserRouter } from 'react-router-dom'
 import { getPokemon } from '../utils/api';
 
 import './Pokemon.css';
-import pokemon_logo from './pokemon_logo.png';
+// import pokemon_logo from './pokemon_logo.png';
+import Header from '../components/Header';
+import Details from '../container/Details';
 
-import Details from './Details'
 import Interface from './Interface'
+
+import Screen from './Screen';
 
 export default class Pokemon extends Component {
   constructor(props){
     super(props)
 
     this.state = {
-      id: '',
+      id: Math.floor(Math.random() * (499) + 1),
       name: '',
       img: '',
       type: [],
@@ -21,15 +24,21 @@ export default class Pokemon extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.fetchPokemon = this.fetchPokemon.bind(this);
+    this.renderScreen = this.renderScreen.bind(this);
   }
 
   componentWillMount() {
-    this.setState({ id: Math.floor(Math.random() * (499) + 1)})
-  }
-
-  componentDidMount(){
+    // this.setState({ id: Math.floor(Math.random() * (499) + 1)})
     this.fetchPokemon();
   }
+
+  // componentWillReceiveProps() {
+  //   this.fetchPokemon();
+  // }
+
+  // componentDidMount(){
+  //   this.fetchPokemon();
+  // }
 
   fetchPokemon() {
     getPokemon(this.state.id).then(pokemon => 
@@ -44,29 +53,42 @@ export default class Pokemon extends Component {
     )
   }
 
+  renderScreen(img, id) {
+    if(img) {
+      return(
+        <Link to={`/details/${id}`}>
+          <Screen img={img} />
+        </Link>
+      )
+    }
+  }
+
   handleChange(e) {
     this.setState({ id: e.target.value })
   }
 
   render(){
 
+    const { img, id } = this.state;
+    console.log('Parent Img', img)
+
     return(
       <div className="App">
 
-        <div className="App-header">
-          <Link to='/'><img src={pokemon_logo} className="App-logo" alt="logo" /></Link>
-        </div>
+        <Header />
 
         <Interface 
           fetchPokemon={this.fetchPokemon} 
           handleChange={this.handleChange} 
         />
 
-        <div className='picView'>
-          <Link to=""><img src={this.state.img} alt='pokemon_image' /></Link>
-        </div>
+        { 
+          img ? 
+          this.renderScreen(img, id) 
+          : null
+        }
 
-        {/* <Details type={this.state.type} /> */}
+        <Route path='/details/:id' component={Details} />
 
         <div className='nameView'>
           <p>{this.state.name}</p>
